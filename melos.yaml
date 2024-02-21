@@ -1,0 +1,25 @@
+name: flutter_hooks_lint
+
+packages:
+  - packages/**
+
+command:
+  bootstrap:
+    hooks:
+      post: melos test
+
+scripts:
+  analyze:
+    exec: dart analyze .
+  test:
+    exec: dart test --no-retry
+    packageFilters:
+      scope: "flutter_hooks_lint_flutter_test"
+  fix:
+    exec: dart fix --apply .
+    packageFilters:
+      scope: "*flutter_hooks_lint"
+  fix-dry-run:
+    exec: dart fix --dry-run .
+    packageFilters:
+      scope: "*flutter_hooks_lint"

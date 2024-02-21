@@ -1,0 +1,44 @@
+Message: `Convert to useCallback`
+Priority: 30
+Diff for file `test/hooks_callback_consideration/hooks_callback_consideration.dart:7`:
+```
+  @override
+  Widget build(BuildContext context) {
+-     final state = useMemoized(() => () => 0, const []);
++     final state = useCallback(() => 0, const []);
+    return Text(state.call().toString());
+  }
+```
+---
+Message: `Convert to useCallback`
+Priority: 30
+Diff for file `test/hooks_callback_consideration/hooks_callback_consideration.dart:15`:
+```
+  @override
+  Widget build(BuildContext context) {
+-     final state = useMemoized(
+-       () => () {
+-         return 0;
+-       },
+-     );
++     final state = useCallback(() {return 0;});
+    return Text(state.call().toString());
+  }
+```
+---
+Message: `Convert to useCallback`
+Priority: 30
+Diff for file `test/hooks_callback_consideration/hooks_callback_consideration.dart:27`:
+```
+  @override
+  Widget build(BuildContext context) {
+-     final state = useMemoized(() {
+-       return () {
+-         return 0;
+-       };
+-     });
++     final state = useCallback(() {return 0;});
+    return Text(state.call().toString());
+  }
+```
+---

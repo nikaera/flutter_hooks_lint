@@ -1,0 +1,50 @@
+name: Project CI
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+    paths:
+      - "packages/**/lib/**"
+      - "packages/**/test/**"
+      - "pubspec.yaml"
+  push:
+    branches:
+      - main
+    paths:
+      - "packages/**/lib/**"
+      - "packages/**/test/**"
+      - "pubspec.yaml"
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  project-ci:
+    name: CI
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Install Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: "microsoft"
+          java-version: "21"
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.19.0"
+          channel: "stable"
+          cache: true
+      - name: Install Flutter library
+        run: flutter pub get
+      - name: Install Melos
+        run: dart pub global activate melos
+      - name: Set up the project and run the test
+        run: melos bootstrap
+      - name: Linter
+        run: melos fix-dry-run
+      - name: Analyze
+        run: melos analyze

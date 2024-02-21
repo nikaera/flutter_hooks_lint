@@ -1,0 +1,48 @@
+Message: `Wrap with useMemoized`
+Priority: 30
+Diff for file `test/hooks_memoized_consideration/hooks_memoized_consideration.dart:7`:
+```
+  @override
+  Widget build(BuildContext context) {
+-     final key = GlobalKey<TooltipState>();
++     final key = useMemoized(() => GlobalKey<TooltipState>());
+    final objectKey = GlobalObjectKey<TooltipState>("object");
+    return Column(
+```
+---
+Message: `Wrap with useMemoized`
+Priority: 30
+Diff for file `test/hooks_memoized_consideration/hooks_memoized_consideration.dart:8`:
+```
+  Widget build(BuildContext context) {
+    final key = GlobalKey<TooltipState>();
+-     final objectKey = GlobalObjectKey<TooltipState>("object");
++     final objectKey = useMemoized(() => GlobalObjectKey<TooltipState>("object"));
+    return Column(
+        children: [key, objectKey]
+```
+---
+Message: `Wrap with useMemoized`
+Priority: 30
+Diff for file `test/hooks_memoized_consideration/hooks_memoized_consideration.dart:24`:
+```
+    final state = useState(0);
+    final snapshot =
+-         useFuture(Future.delayed(Duration(seconds: 5), () => "Hi!"));
++         useMemoized(() => useFuture(Future.delayed(Duration(seconds: 5), () => "Hi!")));
+    useEffect(() {
+      if (snapshot.hasData && snapshot.data != null) {
+```
+---
+Message: `Wrap with useMemoized`
+Priority: 30
+Diff for file `test/hooks_memoized_consideration/hooks_memoized_consideration.dart:24`:
+```
+    final state = useState(0);
+    final snapshot =
+-         useFuture(Future.delayed(Duration(seconds: 5), () => "Hi!"));
++         useMemoized(() => useFuture(Future.delayed(Duration(seconds: 5), () => "Hi!")));
+    useEffect(() {
+      if (snapshot.hasData && snapshot.data != null) {
+```
+---

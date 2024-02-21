@@ -1,0 +1,21 @@
+on:
+  push:
+    paths:
+      - .github/workflows/*.yaml
+      - .github/actionlint.yaml
+      - .github/actionlint-matcher.json
+
+name: Actions CI
+jobs:
+  actionlint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install actionlint
+        shell: bash
+        run: bash <(curl https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash)
+      - name: Add problem matcher
+        run: echo "::add-matcher::.github/actionlint-matcher.json"
+      - name: Run Actionlint
+        run: ./actionlint
+        shell: bash

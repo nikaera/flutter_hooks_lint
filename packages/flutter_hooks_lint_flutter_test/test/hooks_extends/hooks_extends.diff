@@ -1,0 +1,24 @@
+Message: `Convert to HookWidget`
+Priority: 30
+Diff for file `test/hooks_extends/hooks_extends.dart:5`:
+```
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+- class RequiresHookWidget extends StatelessWidget {
++ class RequiresHookWidget extends HookWidget {
+  @override
+  Widget build(BuildContext context) {
+```
+---
+Message: `Convert to HookConsumerWidget`
+Priority: 30
+Diff for file `test/hooks_extends/hooks_extends.dart:13`:
+```
+}
+
+- class RequiresConsumerHookWidget extends ConsumerWidget {
++ class RequiresConsumerHookWidget extends HookConsumerWidget {
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+```
+---
