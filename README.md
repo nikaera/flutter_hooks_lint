@@ -1,5 +1,15 @@
 # flutter_hooks_lint🪝🏴‍☠️
 
+<a href="https://pub.dartlang.org/packages/flutter_hooks_lint">
+  <img src="https://img.shields.io/pub/v/flutter_hooks_lint.svg" alt="flutter_hooks_lint package">
+</a>
+<a href="https://pub.dev/packages/very_good_analysis">
+  <img src="https://img.shields.io/badge/style-very__good__analysis-40c4ff.svg" alt="very_good_analysis" />
+</a>
+<a href="https://github.com/nikaera/flutter_hooks_lint/actions/workflows/project-ci.yaml">
+  <img src="https://github.com/nikaera/flutter_hooks_lint/actions/workflows/project-ci.yaml/badge.svg" alt="Build Status">
+</a>
+
 A lint package providing guidelines for using [flutter_hooks](https://pub.dev/packages/flutter_hooks) in your Flutter widget! 🦜
 
 * You can keep code that follows the rules outlined in the [official documentation of flutter_hooks](https://pub.dev/packages/flutter_hooks#rules). ⚓
