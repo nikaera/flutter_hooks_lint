@@ -10,9 +10,21 @@ import 'custom_hooks.dart';
   Widget build(BuildContext context) {
 ```
 ---
-Message: `Convert to ConsumerWidget`
+Message: `Convert to StatelessWidget`
 Priority: 30
 Diff for file `test/hooks_unuse_widget/hooks_unuse_widget.dart:31`:
+```
+}
+
+- class ClassCustomHookWidget extends HookWidget {
++ class ClassCustomHookWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+```
+---
+Message: `Convert to ConsumerWidget`
+Priority: 30
+Diff for file `test/hooks_unuse_widget/hooks_unuse_widget.dart:43`:
 ```
 }
 

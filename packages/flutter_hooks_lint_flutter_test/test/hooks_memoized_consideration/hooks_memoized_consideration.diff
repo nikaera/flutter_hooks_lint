@@ -1,6 +1,6 @@
 Message: `Wrap with useMemoized`
 Priority: 30
-Diff for file `test/hooks_memoized_consideration/hooks_memoized_consideration.dart:7`:
+Diff for file `test/hooks_memoized_consideration/hooks_memoized_consideration.dart:8`:
 ```
   @override
   Widget build(BuildContext context) {
@@ -12,7 +12,7 @@ Diff for file `test/hooks_memoized_consideration/hooks_memoized_consideration.da
 ---
 Message: `Wrap with useMemoized`
 Priority: 30
-Diff for file `test/hooks_memoized_consideration/hooks_memoized_consideration.dart:8`:
+Diff for file `test/hooks_memoized_consideration/hooks_memoized_consideration.dart:9`:
 ```
   Widget build(BuildContext context) {
     final key = GlobalKey<TooltipState>();
@@ -24,7 +24,7 @@ Diff for file `test/hooks_memoized_consideration/hooks_memoized_consideration.da
 ---
 Message: `Wrap with useMemoized`
 Priority: 30
-Diff for file `test/hooks_memoized_consideration/hooks_memoized_consideration.dart:24`:
+Diff for file `test/hooks_memoized_consideration/hooks_memoized_consideration.dart:25`:
 ```
     final state = useState(0);
     final snapshot =
@@ -36,7 +36,7 @@ Diff for file `test/hooks_memoized_consideration/hooks_memoized_consideration.da
 ---
 Message: `Wrap with useMemoized`
 Priority: 30
-Diff for file `test/hooks_memoized_consideration/hooks_memoized_consideration.dart:24`:
+Diff for file `test/hooks_memoized_consideration/hooks_memoized_consideration.dart:25`:
 ```
     final state = useState(0);
     final snapshot =

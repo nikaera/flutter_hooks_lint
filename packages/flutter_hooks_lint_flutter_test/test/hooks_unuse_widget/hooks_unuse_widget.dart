@@ -28,6 +28,18 @@ class UseCustomHookWidget extends HookWidget {
   }
 }
 
+class ClassCustomHookWidget extends HookWidget {
+  @override
+  Widget build(BuildContext context) {
+    // TODO(nikaera): Custom hooks should not be defined within a class in the first place,
+    // so define them with lint rules.
+    TestHelper.useEffectOnce(() {
+      return;
+    });
+    return Text('');
+  }
+}
+
 class UnuseHookConsumerWidget extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {

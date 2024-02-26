@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class ConsiderationMemoizedWidget extends StatelessWidget {
+class ConsiderationMemoizedWidget extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final key = GlobalKey<TooltipState>();
@@ -29,5 +30,15 @@ class HookConsiderationMemoizedWidget extends HookWidget {
       return;
     }, [snapshot.hasData]);
     return Text(state.value.toString());
+  }
+}
+
+final _globalKeyProvider = Provider((ref) => GlobalKey());
+
+class ConsumerConsiderationMemoizedWidget extends ConsumerWidget {
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final globalKey = ref.watch(_globalKeyProvider);
+    return Text(globalKey.toString());
   }
 }

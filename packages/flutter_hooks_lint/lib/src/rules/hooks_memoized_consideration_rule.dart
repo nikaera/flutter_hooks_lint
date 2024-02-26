@@ -1,3 +1,4 @@
+import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/error/error.dart';
 import 'package:analyzer/error/listener.dart';
 import 'package:analyzer/source/source_range.dart';
@@ -32,10 +33,25 @@ class HooksMemoizedConsiderationRule extends DartLintRule {
     });
 
     context.registry.addVariableDeclaration((node) {
-      final type = node.declaredElement?.type;
+      final classDeclaration = node.thisOrAncestorOfType<ClassDeclaration>();
+      final extendsClause = classDeclaration?.extendsClause;
+      if (extendsClause == null) {
+        return;
+      }
+      final extendsElement = extendsClause.superclass.element;
+      if (extendsElement == null) {
+        return;
+      }
+      if (!HooksHelper.isHooksElement(extendsElement)) {
+        return;
+      }
+
+      final declaredElement = node.declaredElement;
+      final type = declaredElement?.type;
       if (type == null) {
         return;
       }
+
       if (HooksHelper.isConsiderUseMemoized(type)) {
         reporter.reportErrorForNode(code, node);
       }

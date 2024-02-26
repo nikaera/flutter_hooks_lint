@@ -2,8 +2,11 @@ import 'package:analyzer/dart/analysis/analysis_context_collection.dart';
 import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/ast/visitor.dart';
+import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/file_system/physical_file_system.dart';
 import 'package:flutter_hooks_lint/src/helpers/hooks_helper.dart';
+
+final _regexp = RegExp('^use[A-Z]{1}');
 
 class HooksMethodVisitor extends RecursiveAstVisitor<void> {
   const HooksMethodVisitor({
@@ -17,15 +20,18 @@ class HooksMethodVisitor extends RecursiveAstVisitor<void> {
     if (element == null) {
       return;
     }
+    if (element.enclosingElement is ClassElement) {
+      return;
+    }
 
     final methodName = node.methodName.name;
 
     if (HooksHelper.isHooksElement(element)) {
       onVisitMethodInvocation(node);
       // NOTE: DO always prefix your hooks with use, https://pub.dev/packages/flutter_hooks#rules.
-    } else if (methodName.startsWith('use')) {
+    } else if (_regexp.hasMatch(methodName)) {
       try {
-        final filePath = element.librarySource?.uri.toFilePath();
+        final filePath = element.librarySource?.fullName;
         if (filePath != null) {
           final collection = AnalysisContextCollection(
             includedPaths: [filePath],
@@ -49,7 +55,7 @@ class HooksMethodVisitor extends RecursiveAstVisitor<void> {
           onVisitMethodInvocation(node);
         }
       } catch (e) {
-        print(e);
+        print('$methodName: $e');
       }
     }
 
