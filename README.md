@@ -1,6 +1,22 @@
 # flutter_hooks_lint🪝🏴‍☠️
 
-A lint package providing guidelines for using [flutter_hooks](https://pub.dev/packages/flutter_hooks) in your Flutter widget 🦜
+A lint package providing guidelines for using [flutter_hooks](https://pub.dev/packages/flutter_hooks) in your Flutter widget! 🦜
+
+* You can keep code that follows the rules outlined in the [official documentation of flutter_hooks](https://pub.dev/packages/flutter_hooks#rules). ⚓
+* A lint rules are available to **improve both performance and readability**. ✨
+* A lint rules **supporting [`hooks_riverpod`](https://pub.dev/packages/hooks_riverpod) has been prepared**. 🧑‍🤝‍🧑
+
+The currently available lint rules are as follows:
+
+| LintRule  | Description | Quickfix |
+| ------------- | ------------- | ------------- |
+| [hooks_avoid_nesting](#hooks_avoid_nesting)  | You should use Hooks only inside the build method of a Widget. | |
+| [hooks_extends](#hooks_extends)  | Using Hooks inside a Widget other than HookWidget or HookConsumerWidget will result in an error at runtime. | ✅ |
+| [hooks_unuse_widget](#hooks_unuse_widget)  | If you are not using Hooks inside of a Widget, you do not need HookWidget or HookConsumerWidget. | ✅ |
+| [hooks_memoized_consideration](#hooks_memoized_consideration)  | Considering performance and functionality, there may be places where it is worth considering the use of useMemoized. | ✅ |
+| [hooks_callback_consideration](#hooks_callback_consideration)  | There are cases where you can use useCallback, which is the syntax sugar for useMemoized. | ✅ |
+
+![screencast](https://github.com/nikaera/flutter_hooks_lint/assets/1802476/bbea0791-502e-4091-8941-a94e15097752)
 
 ## Installation
 
@@ -94,8 +110,6 @@ Widget build(BuildContext context) {
 ### hooks_extends
 
 **Using Hooks inside a Widget other than `HookWidget` or `HookConsumerWidget` will result in an error at runtime.**
-
-* 
 
 **Bad**:
 
@@ -254,13 +268,16 @@ class ConsiderationMemoizedWidget extends HookWidget {
 
 ## Contribution 🎁
 
-Thanks for your interest! PR are welcomed!
+Thanks for your interest! PR are welcomed! 🙌
+I would be delighted if you could translate the documentation into natural English or add new lint rules!
+
+The project setup procedures for development are as follows:
 
 1. Fork it ( https://github.com/nikaera/flutter_hooks_lint/fork )
 2. Create your fix/feature branch (git checkout -b my-new-feature)
 3. Install Melos ( `dart pub global activate melos` )
 4. Set up the project and run the test ( `melos bs` )
-5. Add a test each time you make a modification.
+5. Add a test each time you modify
 6. `4.` it is possible to check the operation by executing the command ( `melos bs` )
 7. Commit your changes (git commit -am 'Add some feature')
 8. Push to the branch (git push origin my-new-feature)
