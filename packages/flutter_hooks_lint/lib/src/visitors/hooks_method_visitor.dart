@@ -24,28 +24,32 @@ class HooksMethodVisitor extends RecursiveAstVisitor<void> {
       onVisitMethodInvocation(node);
       // NOTE: DO always prefix your hooks with use, https://pub.dev/packages/flutter_hooks#rules.
     } else if (methodName.startsWith('use')) {
-      final filePath = element.librarySource?.uri.toFilePath();
-      if (filePath != null) {
-        final collection = AnalysisContextCollection(
-          includedPaths: [filePath],
-          resourceProvider: PhysicalResourceProvider.INSTANCE,
-        );
-
-        final context = collection.contextFor(filePath);
-        final result = context.currentSession.getParsedUnit(filePath);
-
-        if (result is ParsedUnitResult) {
-          final AstNode rootNode = result.unit;
-          rootNode.visitChildren(
-            _SpecificFunctionDeclarationVisitor(
-              functionName: methodName,
-              onVisitFunctionDeclaration: (node) {
-                node.visitChildren(this);
-              },
-            ),
+      try {
+        final filePath = element.librarySource?.uri.toFilePath();
+        if (filePath != null) {
+          final collection = AnalysisContextCollection(
+            includedPaths: [filePath],
+            resourceProvider: PhysicalResourceProvider.INSTANCE,
           );
+
+          final context = collection.contextFor(filePath);
+          final result = context.currentSession.getParsedUnit(filePath);
+
+          if (result is ParsedUnitResult) {
+            final AstNode rootNode = result.unit;
+            rootNode.visitChildren(
+              _SpecificFunctionDeclarationVisitor(
+                functionName: methodName,
+                onVisitFunctionDeclaration: (node) {
+                  node.visitChildren(this);
+                },
+              ),
+            );
+          }
+          onVisitMethodInvocation(node);
         }
-        onVisitMethodInvocation(node);
+      } catch (e) {
+        print(e);
       }
     }
 
