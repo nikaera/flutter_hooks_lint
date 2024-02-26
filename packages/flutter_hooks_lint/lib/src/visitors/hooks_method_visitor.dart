@@ -22,6 +22,7 @@ class HooksMethodVisitor extends RecursiveAstVisitor<void> {
 
     if (HooksHelper.isHooksElement(element)) {
       onVisitMethodInvocation(node);
+      // NOTE: DO always prefix your hooks with use, https://pub.dev/packages/flutter_hooks#rules.
     } else if (methodName.startsWith('use')) {
       final filePath = element.librarySource?.uri.toFilePath();
       if (filePath != null) {
