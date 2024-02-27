@@ -24,10 +24,6 @@ class HooksMemoizedConsiderationRule extends DartLintRule {
       classNode.visitChildren(
         HooksMethodVisitor(
           onVisitMethodInvocation: (node) {
-            if (node.methodName.name == 'useMemoized') {
-              return;
-            }
-
             final ancestor =
                 node.parent?.thisOrAncestorOfType<MethodInvocation>();
             if (ancestor?.methodName.name == 'useMemoized') {
