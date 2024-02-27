@@ -7,6 +7,8 @@ class ConsiderationMemoizedWidget extends HookWidget {
   Widget build(BuildContext context) {
     final key = GlobalKey<TooltipState>();
     final objectKey = GlobalObjectKey<TooltipState>("object");
+    final _ = useMemoized(GlobalKey.new);
+    final __ = useMemoized(() => GlobalObjectKey("object_memo"));
     return Column(
         children: [key, objectKey]
             .map((k) => Tooltip(
@@ -23,6 +25,8 @@ class HookConsiderationMemoizedWidget extends HookWidget {
     final state = useState(0);
     final snapshot =
         useFuture(Future.delayed(Duration(seconds: 5), () => "Hi!"));
+    final _ = useMemoized(
+        () => useFuture(Future.delayed(Duration(seconds: 5), () => "Hi!")));
     useEffect(() {
       if (snapshot.hasData && snapshot.data != null) {
         state.value = 5;

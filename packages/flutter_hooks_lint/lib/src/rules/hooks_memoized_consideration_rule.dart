@@ -24,6 +24,15 @@ class HooksMemoizedConsiderationRule extends DartLintRule {
       classNode.visitChildren(
         HooksMethodVisitor(
           onVisitMethodInvocation: (node) {
+            if (node.methodName.name == 'useMemoized') {
+              return;
+            }
+
+            final ancestor =
+                node.parent?.thisOrAncestorOfType<MethodInvocation>();
+            if (ancestor?.methodName.name == 'useMemoized') {
+              return;
+            }
             if (['useFuture', 'useStream'].contains(node.methodName.name)) {
               reporter.reportErrorForNode(code, node);
             }
@@ -33,6 +42,10 @@ class HooksMemoizedConsiderationRule extends DartLintRule {
     });
 
     context.registry.addVariableDeclaration((node) {
+      if (node.childEntities.last.toString().startsWith('useMemoized')) {
+        return;
+      }
+
       final classDeclaration = node.thisOrAncestorOfType<ClassDeclaration>();
       final extendsClause = classDeclaration?.extendsClause;
       if (extendsClause == null) {

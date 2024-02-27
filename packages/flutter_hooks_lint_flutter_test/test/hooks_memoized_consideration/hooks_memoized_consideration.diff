@@ -7,7 +7,7 @@ Diff for file `test/hooks_memoized_consideration/hooks_memoized_consideration.da
 -     final key = GlobalKey<TooltipState>();
 +     final key = useMemoized(() => GlobalKey<TooltipState>());
     final objectKey = GlobalObjectKey<TooltipState>("object");
-    return Column(
+    final _ = useMemoized(GlobalKey.new);
 ```
 ---
 Message: `Wrap with useMemoized`
@@ -18,31 +18,31 @@ Diff for file `test/hooks_memoized_consideration/hooks_memoized_consideration.da
     final key = GlobalKey<TooltipState>();
 -     final objectKey = GlobalObjectKey<TooltipState>("object");
 +     final objectKey = useMemoized(() => GlobalObjectKey<TooltipState>("object"));
-    return Column(
-        children: [key, objectKey]
+    final _ = useMemoized(GlobalKey.new);
+    final __ = useMemoized(() => GlobalObjectKey("object_memo"));
 ```
 ---
 Message: `Wrap with useMemoized`
 Priority: 30
-Diff for file `test/hooks_memoized_consideration/hooks_memoized_consideration.dart:25`:
+Diff for file `test/hooks_memoized_consideration/hooks_memoized_consideration.dart:27`:
 ```
     final state = useState(0);
     final snapshot =
 -         useFuture(Future.delayed(Duration(seconds: 5), () => "Hi!"));
 +         useMemoized(() => useFuture(Future.delayed(Duration(seconds: 5), () => "Hi!")));
-    useEffect(() {
-      if (snapshot.hasData && snapshot.data != null) {
+    final _ = useMemoized(
+        () => useFuture(Future.delayed(Duration(seconds: 5), () => "Hi!")));
 ```
 ---
 Message: `Wrap with useMemoized`
 Priority: 30
-Diff for file `test/hooks_memoized_consideration/hooks_memoized_consideration.dart:25`:
+Diff for file `test/hooks_memoized_consideration/hooks_memoized_consideration.dart:27`:
 ```
     final state = useState(0);
     final snapshot =
 -         useFuture(Future.delayed(Duration(seconds: 5), () => "Hi!"));
 +         useMemoized(() => useFuture(Future.delayed(Duration(seconds: 5), () => "Hi!")));
-    useEffect(() {
-      if (snapshot.hasData && snapshot.data != null) {
+    final _ = useMemoized(
+        () => useFuture(Future.delayed(Duration(seconds: 5), () => "Hi!")));
 ```
 ---

@@ -1,3 +1,7 @@
+## 1.0.4
+
+- Fixed a bug in `hooks_memoized_consideration`
+
 ## 1.0.3
 
 - Fixed a bug in `hooks_method_visitor.dart`
