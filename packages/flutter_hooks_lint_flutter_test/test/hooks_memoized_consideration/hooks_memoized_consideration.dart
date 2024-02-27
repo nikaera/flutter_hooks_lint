@@ -19,14 +19,12 @@ class ConsiderationMemoizedWidget extends HookWidget {
   }
 }
 
-class HookConsiderationMemoizedWidget extends HookWidget {
+class FutureGlobalKeyMemoizedWidget extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final state = useState(0);
     final snapshot =
-        useFuture(Future.delayed(Duration(seconds: 5), () => "Hi!"));
-    final _ = useMemoized(
-        () => useFuture(Future.delayed(Duration(seconds: 5), () => "Hi!")));
+        useFuture(Future.delayed(Duration(seconds: 5), () => GlobalKey()));
     useEffect(() {
       if (snapshot.hasData && snapshot.data != null) {
         state.value = 5;
@@ -39,7 +37,7 @@ class HookConsiderationMemoizedWidget extends HookWidget {
 
 final _globalKeyProvider = Provider((ref) => GlobalKey());
 
-class ConsumerConsiderationMemoizedWidget extends ConsumerWidget {
+class GlobalKeyMemoizedWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final globalKey = ref.watch(_globalKeyProvider);

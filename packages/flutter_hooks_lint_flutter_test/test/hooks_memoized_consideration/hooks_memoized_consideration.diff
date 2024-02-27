@@ -22,27 +22,3 @@ Diff for file `test/hooks_memoized_consideration/hooks_memoized_consideration.da
     final __ = useMemoized(() => GlobalObjectKey("object_memo"));
 ```
 ---
-Message: `Wrap with useMemoized`
-Priority: 30
-Diff for file `test/hooks_memoized_consideration/hooks_memoized_consideration.dart:27`:
-```
-    final state = useState(0);
-    final snapshot =
--         useFuture(Future.delayed(Duration(seconds: 5), () => "Hi!"));
-+         useMemoized(() => useFuture(Future.delayed(Duration(seconds: 5), () => "Hi!")));
-    final _ = useMemoized(
-        () => useFuture(Future.delayed(Duration(seconds: 5), () => "Hi!")));
-```
----
-Message: `Wrap with useMemoized`
-Priority: 30
-Diff for file `test/hooks_memoized_consideration/hooks_memoized_consideration.dart:27`:
-```
-    final state = useState(0);
-    final snapshot =
--         useFuture(Future.delayed(Duration(seconds: 5), () => "Hi!"));
-+         useMemoized(() => useFuture(Future.delayed(Duration(seconds: 5), () => "Hi!")));
-    final _ = useMemoized(
-        () => useFuture(Future.delayed(Duration(seconds: 5), () => "Hi!")));
-```
----

@@ -4,7 +4,6 @@ import 'package:analyzer/error/listener.dart';
 import 'package:analyzer/source/source_range.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
 import 'package:flutter_hooks_lint/src/helpers/hooks_helper.dart';
-import 'package:flutter_hooks_lint/src/visitors/hooks_method_visitor.dart';
 
 class HooksMemoizedConsiderationRule extends DartLintRule {
   const HooksMemoizedConsiderationRule() : super(code: _code);
@@ -20,23 +19,6 @@ class HooksMemoizedConsiderationRule extends DartLintRule {
     ErrorReporter reporter,
     CustomLintContext context,
   ) {
-    context.registry.addClassDeclaration((classNode) {
-      classNode.visitChildren(
-        HooksMethodVisitor(
-          onVisitMethodInvocation: (node) {
-            final ancestor =
-                node.parent?.thisOrAncestorOfType<MethodInvocation>();
-            if (ancestor?.methodName.name == 'useMemoized') {
-              return;
-            }
-            if (['useFuture', 'useStream'].contains(node.methodName.name)) {
-              reporter.reportErrorForNode(code, node);
-            }
-          },
-        ),
-      );
-    });
-
     context.registry.addVariableDeclaration((node) {
       if (node.childEntities.last.toString().startsWith('useMemoized')) {
         return;
@@ -80,31 +62,6 @@ class _LintFix extends DartFix {
     AnalysisError analysisError,
     List<AnalysisError> others,
   ) {
-    context.registry.addClassDeclaration((classNode) {
-      classNode.visitChildren(
-        HooksMethodVisitor(
-          onVisitMethodInvocation: (node) {
-            if (!analysisError.sourceRange.intersects(node.sourceRange)) {
-              return;
-            }
-            if (['useFuture', 'useStream'].contains(node.methodName.name)) {
-              final changeBuilder = reporter.createChangeBuilder(
-                message: 'Wrap with useMemoized',
-                priority: 30,
-              );
-
-              changeBuilder.addDartFileEdit((builder) {
-                builder.addSimpleReplacement(
-                  SourceRange(node.offset, node.length),
-                  'useMemoized(() => ${node.toSource()})',
-                );
-              });
-            }
-          },
-        ),
-      );
-    });
-
     context.registry.addVariableDeclaration((node) {
       if (!analysisError.sourceRange.intersects(node.sourceRange)) {
         return;

@@ -203,10 +203,9 @@ class UnuseHookConsumerWidget extends ConsumerWidget { // ⭕
 
 ### hooks_memoized_consideration
 
-Considering performance and functionality, there may be places where it is worth considering the use of `useMemoized`.
+Considering functionality, there may be places where it is worth considering the use of `useMemoized`.
 
 * https://api.flutter.dev/flutter/widgets/GlobalKey-class.html
-* https://github.com/Region40/flutter_hooks/blob/f9103ae7bfb8df94b1105e4f988764b29d1e2ad3/packages/flutter_hooks/lib/src/async.dart#L8-L24
 
 **Bad**
 
