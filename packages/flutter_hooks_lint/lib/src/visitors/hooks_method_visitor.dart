@@ -18,9 +18,6 @@ class HooksMethodVisitor extends RecursiveAstVisitor<void> {
     if (element == null) {
       return;
     }
-    if (element.enclosingElement is ClassElement) {
-      return;
-    }
 
     final methodName = node.methodName.name;
     final isDartCoreMethod = element.library?.isDartCore ?? false;
