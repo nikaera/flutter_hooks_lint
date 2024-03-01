@@ -6,8 +6,6 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/file_system/physical_file_system.dart';
 import 'package:flutter_hooks_lint/src/helpers/hooks_helper.dart';
 
-final _regexp = RegExp('^use[A-Z]{1}');
-
 class HooksMethodVisitor extends RecursiveAstVisitor<void> {
   const HooksMethodVisitor({
     required this.onVisitMethodInvocation,
@@ -25,11 +23,12 @@ class HooksMethodVisitor extends RecursiveAstVisitor<void> {
     }
 
     final methodName = node.methodName.name;
+    final isDartCoreMethod = element.library?.isDartCore ?? false;
+    final isInSdkMethod = element.library?.isInSdk ?? false;
 
     if (HooksHelper.isHooksElement(element)) {
       onVisitMethodInvocation(node);
-      // NOTE: DO always prefix your hooks with use, https://pub.dev/packages/flutter_hooks#rules.
-    } else if (_regexp.hasMatch(methodName)) {
+    } else if (!isDartCoreMethod && !isInSdkMethod) {
       try {
         final filePath = element.librarySource?.fullName;
         if (filePath != null) {
