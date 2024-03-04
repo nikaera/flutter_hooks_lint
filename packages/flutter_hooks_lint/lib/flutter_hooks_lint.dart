@@ -5,6 +5,7 @@ library;
 
 import 'package:custom_lint_builder/custom_lint_builder.dart';
 import 'package:flutter_hooks_lint/src/rules/hooks_avoid_nesting_rule.dart';
+import 'package:flutter_hooks_lint/src/rules/hooks_avoid_within_class_rule.dart';
 import 'package:flutter_hooks_lint/src/rules/hooks_callback_consideration_rule.dart';
 import 'package:flutter_hooks_lint/src/rules/hooks_extends_rule.dart';
 import 'package:flutter_hooks_lint/src/rules/hooks_memoized_consideration_rule.dart';
@@ -20,6 +21,7 @@ class _FlutterHooksLinter extends PluginBase {
       const HooksExtendsRule(),
       const HooksUnuseWidgetRule(),
       const HooksAvoidNestingRule(),
+      const HooksAvoidWithinClassRule(),
       const HooksNameConventionRule(),
       const HooksMemoizedConsiderationRule(),
       const HooksCallbackConsiderationRule(),

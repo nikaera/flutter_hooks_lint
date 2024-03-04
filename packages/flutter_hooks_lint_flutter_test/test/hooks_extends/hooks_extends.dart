@@ -17,3 +17,13 @@ class RequiresConsumerHookWidget extends ConsumerWidget {
     return Text(state.value.toString());
   }
 }
+
+final _textProvider = Provider((ref) => "");
+
+class RiverpodWidget extends ConsumerWidget {
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final text = ref.watch(_textProvider);
+    return Text(text);
+  }
+}

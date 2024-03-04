@@ -2,7 +2,7 @@ Message: `Convert to StatelessWidget`
 Priority: 30
 Diff for file `test/hooks_unuse_widget/hooks_unuse_widget.dart:6`:
 ```
-import 'custom_hooks.dart';
+import 'src/custom_hooks.dart';
 
 - class UnuseHookWidget extends HookWidget {
 + class UnuseHookWidget extends StatelessWidget {

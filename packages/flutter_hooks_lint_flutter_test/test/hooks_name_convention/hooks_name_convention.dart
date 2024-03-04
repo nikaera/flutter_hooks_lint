@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 import "package:flutter_hooks/flutter_hooks.dart";
 
-import "custom_hooks.dart";
+import "src/custom_hooks.dart";
 
 class CorrectMethodWidget extends HookWidget {
   @override

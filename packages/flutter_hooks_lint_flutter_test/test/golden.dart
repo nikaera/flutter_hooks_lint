@@ -9,7 +9,7 @@ import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/analysis/utilities.dart';
 
 @Deprecated('Do not commit')
-var goldenWrite = false;
+final goldenWrite = false;
 
 File writeToTemporaryFile(String content) {
   final tempDir = Directory.systemTemp.createTempSync();
@@ -31,7 +31,6 @@ void testGolden(
 }) {
   test(description, () async {
     final file = File(sourcePath).absolute;
-
     final result = await resolveFile2(path: file.path);
     result as ResolvedUnitResult;
 
