@@ -1,3 +1,8 @@
+## 1.1.0
+
+- Added a new lint rule called `hooks_avoid_within_class`
+- Fixed a bug in `hooks_method_visitor.dart`
+
 ## 1.0.5
 
 - Do not consider `useFuture` and `useStream` in `hooks_memoized_consideration`
