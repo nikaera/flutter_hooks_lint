@@ -337,7 +337,7 @@ class ConsiderationMemoizedWidget extends HookWidget {
 
 ## Contribution 🎁
 
-Thanks for your interest! PR are welcomed! 🙌
+Thanks for your interest! [Issues](https://github.com/nikaera/flutter_hooks_lint/issues/new) and PR are welcomed! 🙌
 I would be delighted if you could translate the documentation into natural English or add new lint rules!
 
 The project setup procedures for development are as follows:

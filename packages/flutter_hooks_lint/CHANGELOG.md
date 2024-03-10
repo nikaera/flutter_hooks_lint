@@ -1,3 +1,9 @@
+## 1.2.0
+
+- Added a new LintFix to `hook_name_convention_rule`
+- Support for `HookConsumer` and `HookBuilder`
+- Several bug fixes
+
 ## 1.1.0
 
 - Added a new lint rule called `hooks_avoid_within_class`
