@@ -27,3 +27,23 @@ class RiverpodWidget extends ConsumerWidget {
     return Text(text);
   }
 }
+
+class HookBuilderWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return HookBuilder(builder: (context) {
+      final state = useState(0);
+      return Text(state.value.toString());
+    });
+  }
+}
+
+class HookConsumerBuilderWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return HookConsumer(builder: (context, ref, _) {
+      final state = useState(0);
+      return Text(state.value.toString());
+    });
+  }
+}

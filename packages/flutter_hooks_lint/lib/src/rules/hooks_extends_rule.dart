@@ -1,3 +1,5 @@
+import 'package:analyzer/dart/ast/ast.dart';
+import 'package:analyzer/dart/ast/visitor.dart';
 import 'package:analyzer/error/error.dart';
 import 'package:analyzer/error/listener.dart';
 import 'package:analyzer/source/source_range.dart';
@@ -25,13 +27,18 @@ class HooksExtendsRule extends DartLintRule {
       declaration.visitChildren(
         HooksMethodVisitor(
           onVisitMethodInvocation: (node) {
+            final instanceCreation =
+                node.thisOrAncestorOfType<InstanceCreationExpression>();
+            final element = instanceCreation?.constructorName.staticElement;
+            final isIncludedHooksBuilder =
+                element != null && HooksHelper.isHooksElement(element);
+
             final extendsElement =
                 declaration.extendsClause?.superclass.element;
-            if (extendsElement == null) {
-              return;
-            }
+            final isExtendsHooksBuilder = extendsElement != null &&
+                HooksHelper.isHooksElement(extendsElement);
 
-            if (!HooksHelper.isHooksElement(extendsElement)) {
+            if (!isIncludedHooksBuilder && !isExtendsHooksBuilder) {
               reporter.reportErrorForNode(code, node);
             }
           },

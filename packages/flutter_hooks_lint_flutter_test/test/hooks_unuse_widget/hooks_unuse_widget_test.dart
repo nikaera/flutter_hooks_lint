@@ -11,7 +11,7 @@ void main() {
       (result) async {
     final lint = HooksUnuseWidgetRule();
     final errors = await lint.testRun(result);
-    expect(errors, hasLength(2));
+    expect(errors, hasLength(5));
 
     final fixes = lint.getFixes().map((e) => e as DartFix);
     final results = await Future.wait(errors

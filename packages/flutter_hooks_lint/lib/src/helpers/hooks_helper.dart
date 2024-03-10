@@ -2,9 +2,7 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
 
-class HooksHelper {
-  HooksHelper._();
-
+abstract class HooksHelper {
   static bool isHooksElement(Element element) =>
       ['flutter_hooks', 'hooks_riverpod', 'flutter_use']
           .map(

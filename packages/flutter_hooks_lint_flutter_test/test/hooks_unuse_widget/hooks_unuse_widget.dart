@@ -52,3 +52,38 @@ class UseHookConsumerWidget extends HookConsumerWidget {
     return Text(state.value.toString());
   }
 }
+
+class UnuseHookBuilderWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return HookBuilder(builder: (context) {
+      return Text('');
+    });
+  }
+}
+
+class UnuseHookConsumerBuilderWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return HookConsumer(builder: (context, ref, _) {
+      return Text('');
+    });
+  }
+}
+
+void useShowLanguageSelectSheet({
+  required BuildContext context,
+}) {
+  showModalBottomSheet<void>(
+    context: context,
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
+    ),
+    isScrollControlled: true,
+    builder: (BuildContext context) {
+      return HookConsumer(builder: (context, ref, child) {
+        return Text("");
+      });
+    },
+  );
+}

@@ -3,6 +3,7 @@ import 'package:analyzer/dart/ast/visitor.dart';
 import 'package:analyzer/error/error.dart';
 import 'package:analyzer/error/listener.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
+import 'package:flutter_hooks_lint/src/helpers/hooks_helper.dart';
 import 'package:flutter_hooks_lint/src/visitors/hooks_method_visitor.dart';
 
 class HooksAvoidWithinClassRule extends DartLintRule {
@@ -21,31 +22,41 @@ class HooksAvoidWithinClassRule extends DartLintRule {
     CustomLintContext context,
   ) {
     context.registry.addClassDeclaration((declaration) {
-      final collector = _MethodCollector();
-      declaration.visitChildren(collector);
+      declaration.visitChildren(
+        _MethodCollector(
+          onVisitMethodDeclaration: (methodDeclaration) {
+            if ('build' == methodDeclaration.name.lexeme) return;
 
-      for (final methodDeclaration in collector.methods) {
-        // TODO(nikaera): should only detect when the build function name is inherited from the Widget class.
-        if ('build' == methodDeclaration.name.lexeme) continue;
+            methodDeclaration.visitChildren(
+              HooksMethodVisitor(
+                onVisitMethodInvocation: (node) {
+                  final instanceCreation =
+                      node.thisOrAncestorOfType<InstanceCreationExpression>();
+                  final element =
+                      instanceCreation?.constructorName.staticElement;
+                  final isIncludedHooksBuilder =
+                      element != null && HooksHelper.isHooksElement(element);
 
-        methodDeclaration.visitChildren(
-          HooksMethodVisitor(
-            onVisitMethodInvocation: (node) {
-              reporter.reportErrorForNode(code, methodDeclaration);
-            },
-          ),
-        );
-      }
+                  if (!isIncludedHooksBuilder) {
+                    reporter.reportErrorForNode(code, methodDeclaration);
+                  }
+                },
+              ),
+            );
+          },
+        ),
+      );
     });
   }
 }
 
 class _MethodCollector extends GeneralizingAstVisitor<void> {
-  final List<MethodDeclaration> methods = [];
+  const _MethodCollector({required this.onVisitMethodDeclaration});
+  final void Function(MethodDeclaration node) onVisitMethodDeclaration;
 
   @override
   void visitMethodDeclaration(MethodDeclaration node) {
-    methods.add(node);
+    onVisitMethodDeclaration(node);
     super.visitMethodDeclaration(node);
   }
 }

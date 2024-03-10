@@ -9,6 +9,6 @@ void main() {
         File('test/hooks_avoid_nesting/hooks_avoid_nesting.dart').absolute;
     final errors = await HooksAvoidNestingRule().testAnalyzeAndRun(file);
 
-    expect(errors, hasLength(1));
+    expect(errors, hasLength(3));
   }, retry: 0);
 }

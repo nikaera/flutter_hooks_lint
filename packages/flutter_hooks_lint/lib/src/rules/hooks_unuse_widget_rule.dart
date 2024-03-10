@@ -3,6 +3,7 @@ import 'package:analyzer/error/listener.dart';
 import 'package:analyzer/source/source_range.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
 import 'package:flutter_hooks_lint/src/helpers/hooks_helper.dart';
+import 'package:flutter_hooks_lint/src/visitors/hooks_class_instance_creation_visitor.dart';
 import 'package:flutter_hooks_lint/src/visitors/hooks_method_visitor.dart';
 
 class HooksUnuseWidgetRule extends DartLintRule {
@@ -20,6 +21,60 @@ class HooksUnuseWidgetRule extends DartLintRule {
     ErrorReporter reporter,
     CustomLintContext context,
   ) {
+    context.registry.addFunctionDeclaration((node) {
+      node.visitChildren(
+        HooksClassInstanceCreationVisitor(
+          onVisitInstanceCreationExpression: (node) {
+            final element = node.constructorName.staticElement;
+            final isIncludedHooksBuilder =
+                element != null && HooksHelper.isHooksElement(element);
+
+            if (isIncludedHooksBuilder) {
+              var isNeedsHookWidget = false;
+              node.visitChildren(
+                HooksMethodVisitor(
+                  onVisitMethodInvocation: (_) {
+                    isNeedsHookWidget = true;
+                  },
+                ),
+              );
+
+              if (!isNeedsHookWidget) {
+                reporter.reportErrorForNode(code, node);
+              }
+            }
+          },
+        ),
+      );
+    });
+
+    context.registry.addMethodDeclaration((node) {
+      node.visitChildren(
+        HooksClassInstanceCreationVisitor(
+          onVisitInstanceCreationExpression: (node) {
+            final element = node.constructorName.staticElement;
+            final isIncludedHooksBuilder =
+                element != null && HooksHelper.isHooksElement(element);
+
+            if (isIncludedHooksBuilder) {
+              var isNeedsHookWidget = false;
+              node.visitChildren(
+                HooksMethodVisitor(
+                  onVisitMethodInvocation: (_) {
+                    isNeedsHookWidget = true;
+                  },
+                ),
+              );
+
+              if (!isNeedsHookWidget) {
+                reporter.reportErrorForNode(code, node);
+              }
+            }
+          },
+        ),
+      );
+    });
+
     context.registry.addClassDeclaration((declaration) {
       final extendsClause = declaration.extendsClause;
       if (extendsClause == null) {
