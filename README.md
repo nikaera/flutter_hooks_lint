@@ -22,7 +22,7 @@ The currently available lint rules are as follows:
 | ------------- | ------------- | ------------- |
 | [hooks_avoid_nesting](#hooks_avoid_nesting)  | You should use Hooks only inside the build method of a Widget. | |
 | [hooks_avoid_within_class](#hooks_avoid_within_class)  | Hooks must not be defined within the class. | |
-| [hooks_name_convention](#hooks_name_convention)  | DO always prefix your hooks with use, https://pub.dev/packages/flutter_hooks#rules. | |
+| [hooks_name_convention](#hooks_name_convention)  | DO always prefix your hooks with use, https://pub.dev/packages/flutter_hooks#rules. | ✅ |
 | [hooks_extends](#hooks_extends)  | Using Hooks inside a Widget other than HookWidget or HookConsumerWidget will result in an error at runtime. | ✅ |
 | [hooks_unuse_widget](#hooks_unuse_widget)  | If you are not using Hooks inside of a Widget, you do not need HookWidget or HookConsumerWidget. | ✅ |
 | [hooks_memoized_consideration](#hooks_memoized_consideration)  | Considering performance and functionality, there may be places where it is worth considering the use of useMemoized. | ✅ |

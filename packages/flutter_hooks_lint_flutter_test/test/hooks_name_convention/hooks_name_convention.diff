@@ -1,0 +1,12 @@
+Message: `Rename to useEffectOnce`
+Priority: 30
+Diff for file `test/hooks_name_convention/hooks_name_convention.dart:8`:
+```
+}
+
+- void effectOnce(Dispose? Function() effect) {
++ void useEffectOnce(Dispose? Function() effect) {
+  useEffect(effect, const []);
+}
+```
+---

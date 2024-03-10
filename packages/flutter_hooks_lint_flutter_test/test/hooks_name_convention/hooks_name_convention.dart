@@ -1,7 +1,13 @@
 import "package:flutter/material.dart";
 import "package:flutter_hooks/flutter_hooks.dart";
 
-import "src/custom_hooks.dart";
+void useEffectOnce(Dispose? Function() effect) {
+  useEffect(effect, const []);
+}
+
+void effectOnce(Dispose? Function() effect) {
+  useEffect(effect, const []);
+}
 
 class CorrectMethodWidget extends HookWidget {
   @override
