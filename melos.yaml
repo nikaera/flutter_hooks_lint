@@ -9,8 +9,8 @@ command:
       post: melos test
 
 scripts:
-  analyze:
-    exec: dart analyze .
+  update:
+    exec: dart pub upgrade
   test:
     exec: dart test --no-retry
     packageFilters:

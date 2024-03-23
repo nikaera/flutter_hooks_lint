@@ -17,7 +17,8 @@ class HooksMethodVisitor extends RecursiveAstVisitor<void> {
   final MethodInvocation? caller;
 
   /*
-    TODO(nikaera): I would like to recursively verify whether a function accurately utilizes
+    TODO(nikaera):
+    I would like to recursively verify whether a function accurately utilizes
 the hooks package using getResolvedUnit. However, the execution time becomes
 excessively long. Hence, I am simplifying the process by examining if the
 function, which I aim to explore using getParsedUnit, employs the hooks
