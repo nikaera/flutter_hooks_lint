@@ -1,3 +1,7 @@
+## 1.2.1
+
+- Bump `custom_link`
+
 ## 1.2.0
 
 - Added a new LintFix to `hook_name_convention_rule`
