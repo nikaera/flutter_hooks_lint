@@ -1,4 +1,4 @@
-import 'package:analyzer/error/error.dart' hide LintCode;
+import 'package:analyzer/error/error.dart';
 import 'package:analyzer/error/listener.dart';
 import 'package:analyzer/source/source_range.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
@@ -27,7 +27,7 @@ class HooksNameConventionRule extends DartLintRule {
         HooksMethodVisitor(
           onVisitMethodInvocation: (_) {
             if (!_regexp.hasMatch(node.name.lexeme)) {
-              reporter.reportErrorForNode(code, node);
+              reporter.atNode(node, code);
             }
           },
         ),
