@@ -1,5 +1,5 @@
 import 'package:analyzer/dart/ast/ast.dart';
-import 'package:analyzer/error/error.dart';
+import 'package:analyzer/error/error.dart' hide LintCode;
 import 'package:analyzer/error/listener.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
 import 'package:flutter_hooks_lint/src/visitors/hooks_method_visitor.dart';
@@ -47,7 +47,9 @@ class HooksAvoidNestingRule extends DartLintRule {
     if (node is DoStatement) return true;
     if (node is FunctionDeclarationStatement) return true;
     if (node is MethodInvocation &&
-        (node.staticType?.isDartCoreIterable ?? false)) return true;
+        (node.staticType?.isDartCoreIterable ?? false)) {
+      return true;
+    }
     if (node is MethodInvocation && node.methodName.name == 'assert') {
       return true;
     }
