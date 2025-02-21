@@ -14,8 +14,8 @@ environment:
 
 # Add regular dependencies here.
 dependencies:
-  analyzer: ">=6.0.0 <8.0.0"
-  custom_lint_builder: ^0.7.0
+  analyzer: ^7.0.0
+  custom_lint_builder: ^0.7.3
   # path: ^1.8.0
 dev_dependencies:
   lints: ^3.0.0
