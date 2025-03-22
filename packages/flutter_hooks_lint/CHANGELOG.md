@@ -1,3 +1,8 @@
+## 1.3.0
+
+- Added support for newer Flutter versions
+- Update README
+
 ## 1.2.1
 
 - Bump `custom_lint`
