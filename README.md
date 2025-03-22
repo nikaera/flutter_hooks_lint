@@ -344,10 +344,10 @@ The project setup procedures for development are as follows:
 
 1. Fork it ( https://github.com/nikaera/flutter_hooks_lint/fork )
 2. Create your fix/feature branch (git checkout -b my-new-feature)
-3. Install Melos ( `dart pub global activate melos` )
-4. Set up the project and run the test ( `melos bs` )
+3. Install packages  ( `flutter pub get` )
+4. Run the test ( `dart run grinder` )
 5. Add a test each time you modify
-6. `4.` it is possible to check the operation by executing the command ( `melos bs` )
+6. `4.` it is possible to check the operation by executing the command ( `dart run grinder` )
 7. Commit your changes (git commit -am 'Add some feature')
 8. Push to the branch (git push origin my-new-feature)
 9. Create new Pull Request! 🎉

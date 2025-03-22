@@ -27,7 +27,7 @@ class HooksNameConventionRule extends DartLintRule {
         HooksMethodVisitor(
           onVisitMethodInvocation: (_) {
             if (!_regexp.hasMatch(node.name.lexeme)) {
-              reporter.reportErrorForNode(code, node);
+              reporter.atNode(node, code);
             }
           },
         ),

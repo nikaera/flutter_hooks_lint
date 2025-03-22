@@ -1,6 +1,6 @@
 ## 1.2.1
 
-- Bump `custom_link`
+- Bump `custom_lint`
 
 ## 1.2.0
 

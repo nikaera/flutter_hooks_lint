@@ -35,16 +35,14 @@ jobs:
       - name: Install Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: "3.24.3"
+          flutter-version: "3.29.2"
           channel: "stable"
           cache: true
       - name: Install Flutter library
         run: flutter pub get
-      - name: Install Melos
-        run: dart pub global activate melos
       - name: Set up the project and run the test
-        run: melos bootstrap
+        run: dart run grinder test
       - name: Linter
-        run: melos fix-dry-run
+        run: dart run grinder fix --dry-run
       - name: Analyze
-        run: melos analyze
+        run: dart run grinder analyze

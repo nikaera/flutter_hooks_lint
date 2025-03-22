@@ -38,7 +38,7 @@ class HooksExtendsRule extends DartLintRule {
                 HooksHelper.isHooksElement(extendsElement);
 
             if (!isIncludedHooksBuilder && !isExtendsHooksBuilder) {
-              reporter.reportErrorForNode(code, node);
+              reporter.atNode(node, code);
             }
           },
         ),
