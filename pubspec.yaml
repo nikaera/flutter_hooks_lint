@@ -1,7 +1,12 @@
-name: flutter_hooks_lint
+name: flutter_hooks_lint_root
 repository: https://github.com/nikaera/flutter_hooks_lint
 
 environment:
-  sdk: ">=3.0.0 <4.0.0"
+  sdk: ">=3.5.0 <4.0.0"
+
 dev_dependencies:
-  melos: ^6.2.0
+  grinder: ^0.9.5
+
+workspace:
+  - packages/flutter_hooks_lint
+  - packages/flutter_hooks_lint_flutter_test

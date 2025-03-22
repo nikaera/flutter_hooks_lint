@@ -44,7 +44,7 @@ class HooksMemoizedConsiderationRule extends DartLintRule {
       }
 
       if (HooksHelper.isConsiderUseMemoized(type)) {
-        reporter.reportErrorForNode(code, node);
+        reporter.atNode(node, code);
       }
     });
   }

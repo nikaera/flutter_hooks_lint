@@ -25,7 +25,7 @@ class HooksAvoidNestingRule extends DartLintRule {
         HooksMethodVisitor(
           onVisitMethodInvocation: (node) {
             if (_findControlFlow(node)) {
-              reporter.reportErrorForNode(code, node);
+              reporter.atNode(node, code);
             }
           },
         ),
@@ -47,7 +47,9 @@ class HooksAvoidNestingRule extends DartLintRule {
     if (node is DoStatement) return true;
     if (node is FunctionDeclarationStatement) return true;
     if (node is MethodInvocation &&
-        (node.staticType?.isDartCoreIterable ?? false)) return true;
+        (node.staticType?.isDartCoreIterable ?? false)) {
+      return true;
+    }
     if (node is MethodInvocation && node.methodName.name == 'assert') {
       return true;
     }

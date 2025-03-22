@@ -40,7 +40,7 @@ class HooksUnuseWidgetRule extends DartLintRule {
               );
 
               if (!isNeedsHookWidget) {
-                reporter.reportErrorForNode(code, node);
+                reporter.atNode(node, code);
               }
             }
           },
@@ -67,7 +67,7 @@ class HooksUnuseWidgetRule extends DartLintRule {
               );
 
               if (!isNeedsHookWidget) {
-                reporter.reportErrorForNode(code, node);
+                reporter.atNode(node, code);
               }
             }
           },
@@ -100,7 +100,7 @@ class HooksUnuseWidgetRule extends DartLintRule {
       );
 
       if (!isNeedsHookWidget) {
-        reporter.reportErrorForNode(code, extendsClause.superclass);
+        reporter.atNode(extendsClause.superclass, code);
       }
     });
   }
