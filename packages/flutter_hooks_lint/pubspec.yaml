@@ -1,6 +1,6 @@
 name: flutter_hooks_lint
 description: A lint package providing guidelines for using flutter_hooks in your Flutter widget!
-version: 1.3.0
+version: 1.3.1
 homepage: https://github.com/nikaera/flutter_hooks_lint
 repository: https://github.com/nikaera/flutter_hooks_lint
 documentation: https://github.com/nikaera/flutter_hooks_lint
@@ -15,8 +15,8 @@ environment:
 
 # Add regular dependencies here.
 dependencies:
-  analyzer: ^7.3.0
-  custom_lint_builder: ^0.7.5
+  analyzer: ">=6.0.0"
+  custom_lint_builder: ">=0.6.0"
   # path: ^1.8.0
 dev_dependencies:
   lints: ^5.1.1
