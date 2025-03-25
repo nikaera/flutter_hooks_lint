@@ -1,3 +1,7 @@
+## 1.3.1
+
+- update dependency versions for analyzer and custom_lint packages
+
 ## 1.3.0
 
 - Added support for newer Flutter versions
