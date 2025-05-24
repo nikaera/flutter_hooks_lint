@@ -291,7 +291,7 @@ class ConsiderationMemoizedWidget extends StatelessWidget {
 **Good**
 
 ```dart
-class ConsiderationMemoizedWidget extends HooksWidget {
+class ConsiderationMemoizedWidget extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final key = useMemoized(() => GlobalKey<TooltipState>()); // ⭕
